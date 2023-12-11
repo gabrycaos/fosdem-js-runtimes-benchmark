@@ -1,0 +1,28 @@
+version: "2"
+
+services:
+  node:
+    image: "node:iron-alpine"
+    working_dir: /home/node/app
+    volumes:
+      - ./node.js:/home/node/app/index.js
+    ports:
+      - "3001:3000"
+    command: >
+      node index.js
+  deno:
+    image: "denoland/deno:alpine"
+    volumes:
+      - ./deno.js:/app/index.js
+    ports:
+      - "3002:8000"
+    command: >
+      deno run --allow-net /app/index.js
+  bun:
+    image: "oven/bun:alpine"
+    volumes:
+      - ./bun.js:/home/bun/app/index.js
+    ports:
+      - "3003:3000"
+    command: >
+      bun run index.js
